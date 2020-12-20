@@ -9,10 +9,13 @@ function Toggle({ children }) {
   const toggle = () => setOn(!on)
 
   return React.Children.map(children, (child, index) => {
-    return React.cloneElement(child, {
-      on,
-      onClick: toggle
-    })
+    const reactElement = child.type.name;
+    console.log(reactElement);
+    return React.cloneElement(child,
+      {
+        on: reactElement ? on : undefined,
+        onClick: toggle
+      })
   })
 
   // 🐨 replace this with a call to React.Children.map and map each child in
@@ -41,6 +44,8 @@ function App() {
       <Toggle>
         <ToggleOn>The button is on</ToggleOn>
         <ToggleOff>The button is off</ToggleOff>
+        <br />
+        <span>Toggle Button</span>
         <ToggleButton />
       </Toggle>
     </div>

@@ -2,21 +2,21 @@
 // http://localhost:3000/isolated/exercise/03.js
 
 import * as React from 'react'
-import {Switch} from '../switch'
+import { Switch } from '../switch'
 import { ToggleProvider, useToggle, ToggleContext } from '../context/toggle-context';
 
 // 🐨 create your ToggleContext context here
 // 📜 https://reactjs.org/docs/context.html#reactcreatecontext
 
-function Toggle({onToggle, children}) {
+function Toggle({ onToggle, children }) {
   const [on, setOn] = React.useState(false)
   const toggle = () => setOn(!on)
 
   // 🐨 remove all this 💣 and instead return <ToggleContext.Provider> where
   // the value is an object that has `on` and `toggle` on it.
-  const value = {on, toggle};
+  const value = { on, toggle };
   return (
-    <ToggleProvider value={{value}}>
+    <ToggleProvider value={{ value }}>
       {children}
     </ToggleProvider>
   )
@@ -30,13 +30,13 @@ function Toggle({onToggle, children}) {
 // 💰 `const context = React.useContext(ToggleContext)`
 // 📜 https://reactjs.org/docs/hooks-reference.html#usecontext
 function ToggleOn({ children }) {
-  const { value: { on }} = useToggle();
+  const { value: { on } } = useToggle();
   return on ? children : null
 }
 
 // 🐨 do the same thing to this that you did to the ToggleOn component
 function ToggleOff({ children }) {
-  const { value: { on }} = useToggle();
+  const { value: { on } } = useToggle();
   return on ? null : children
 }
 

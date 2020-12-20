@@ -1,20 +1,20 @@
 import * as React from 'react'
-import {render, screen, waitForElementToBeRemoved} from '@testing-library/react'
+import { render, screen, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as userClient from '../user-client'
-import {AuthProvider} from '../auth-context'
-import App from '../final/01'
-// import App from '../exercise/01'
+import { AuthProvider } from '../auth-context'
+// import App from '../final/01'
+import App from '../exercise/01'
 
 jest.mock('../user-client', () => {
-  return {updateUser: jest.fn(() => Promise.resolve())}
+  return { updateUser: jest.fn(() => Promise.resolve()) }
 })
 
-const mockUser = {username: 'jakiechan', tagline: '', bio: ''}
+const mockUser = { username: 'jakiechan', tagline: '', bio: '' }
 
 function renderApp() {
   const utils = render(
-    <AuthProvider user={{user: mockUser}}>
+    <AuthProvider user={{ user: mockUser }}>
       <App />
     </AuthProvider>,
   )
@@ -47,7 +47,7 @@ test('happy path works', async () => {
   expect(submitButton).toHaveAttribute('disabled')
   expect(resetButton).toHaveAttribute('disabled')
 
-  const testData = {...mockUser, tagline: 'test tagline', bio: 'test bio'}
+  const testData = { ...mockUser, tagline: 'test tagline', bio: 'test bio' }
   userEvent.type(taglineInput, testData.tagline)
   userEvent.type(bioInput, testData.bio)
 
@@ -56,7 +56,7 @@ test('happy path works', async () => {
   expect(submitButton).not.toHaveAttribute('disabled')
   expect(resetButton).not.toHaveAttribute('disabled')
 
-  const updatedUser = {...mockUser, ...testData}
+  const updatedUser = { ...mockUser, ...testData }
   userClient.updateUser.mockImplementationOnce(() =>
     Promise.resolve(updatedUser),
   )
@@ -89,7 +89,7 @@ test('happy path works', async () => {
 })
 
 test('reset works', () => {
-  const {resetButton, taglineInput} = renderApp()
+  const { resetButton, taglineInput } = renderApp()
 
   userEvent.type(taglineInput, 'foo')
   userEvent.click(resetButton)
@@ -106,14 +106,14 @@ test('failure works', async () => {
     getDisplayData,
   } = renderApp()
 
-  const testData = {...mockUser, bio: 'test bio'}
+  const testData = { ...mockUser, bio: 'test bio' }
   userEvent.type(bioInput, testData.bio)
   const testErrorMessage = 'test error message'
   userClient.updateUser.mockImplementationOnce(() =>
-    Promise.reject({message: testErrorMessage}),
+    Promise.reject({ message: testErrorMessage }),
   )
 
-  const updatedUser = {...mockUser, ...testData}
+  const updatedUser = { ...mockUser, ...testData }
 
   userEvent.click(submitButton)
 

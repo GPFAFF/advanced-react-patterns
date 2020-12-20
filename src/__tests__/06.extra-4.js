@@ -1,12 +1,12 @@
 import * as React from 'react'
-import {alfredTip} from '@kentcdodds/react-workshop-app/test-utils'
-import {render, screen} from '@testing-library/react'
+import { alfredTip } from '@kentcdodds/react-workshop-app/test-utils'
+import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import {Toggle} from '../final/06.extra-4'
-// import {Toggle} from '../exercise/06'
+// import {Toggle} from '../final/06.extra-4'
+import { Toggle } from '../exercise/06.extra-4'
 
 beforeEach(() => {
-  jest.spyOn(console, 'error').mockImplementation(() => {})
+  jest.spyOn(console, 'error').mockImplementation(() => { })
 })
 
 afterEach(() => {
@@ -40,7 +40,7 @@ test('warning for controlled component without onChange', () => {
 })
 
 test('no warning for controlled component with onChange prop', () => {
-  render(<Toggle on={false} onChange={() => {}} />)
+  render(<Toggle on={false} onChange={() => { }} />)
   expect(console.error).toHaveBeenCalledTimes(0)
 })
 

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import {renderToggle, screen, userEvent} from '../../test/utils'
-import App, {Toggle} from '../final/06'
-// import App, {Toggle} from '../exercise/06'
+import { renderToggle, screen, userEvent } from '../../test/utils'
+// import App, {Toggle} from '../final/06'
+import App, { Toggle } from '../exercise/06'
 
 test('toggling either toggle toggles both', () => {
   renderToggle(<App />)
@@ -17,7 +17,7 @@ test('toggling either toggle toggles both', () => {
 })
 
 test('toggle can still be uncontrolled', () => {
-  const {toggleButton, toggle} = renderToggle(<Toggle />)
+  const { toggleButton, toggle } = renderToggle(<Toggle />)
   expect(toggleButton).not.toBeChecked()
   toggle()
   expect(toggleButton).toBeChecked()
